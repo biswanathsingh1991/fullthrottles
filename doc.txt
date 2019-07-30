@@ -1,0 +1,23 @@
+
+Simple end point /api/?search=<string-here>.
+
+Take the querey string create a pandas dataframe with 5 field.
+1 . word -> contian the word.
+2. count -> word count.
+3. word_len -> legth of the entry..
+4, word_start -> 0 if querystring word match at start with same row word . else 0,
+5, check_word -> 0  if querystring word match any position with same row word. else 0,
+
+Then sort the data frame accordinglly
+word_start( ascending ) => word_len(ascending) => word_count(descending) => check_word =>(ascending)
+
+combine shorting will give the expected result. 
+then slice the dataframe from top up to index 25.
+itrate over the new dataframe and construct a list of dict containg word and count key . 
+
+
+drawback :
+
+dataset shape is huge view process taking relative amount of time on single thread to read and construct dataframe. 
+and If database use to store the dataset the response time increse . cache the dataset no considered .
+heroku timeout on 3000ms so . on live 503 error . and on Development as multiple request comes in thread core use reached to 100%.
